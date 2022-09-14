@@ -1,4 +1,4 @@
-package com.dev.firstapi.Domain;
+package com.dev.firstapi.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
