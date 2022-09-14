@@ -8,27 +8,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @Entity
 @Table(name = "alunos")
+@Data
 public class Aluno {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter 
     private long id;
     
-    @Getter @Setter private String nome;
-    @Getter @Setter private String email;
+    private String email;
+    private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "idCurso")
-    @Getter @Setter private Curso curso;
-
-    public Aluno() {
-        
-    }
-    
+    @JoinColumn(name = "id_curso")
+    private Curso curso;    
 }

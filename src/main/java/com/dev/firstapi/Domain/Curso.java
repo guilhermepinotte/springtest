@@ -6,21 +6,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @Entity
 @Table(name = "cursos")
+@Data
 public class Curso {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter 
     private long id;
     
-    @Getter @Setter private String nome;
+    private String nome;
 
-    public Curso () {
-
-    }
 }
