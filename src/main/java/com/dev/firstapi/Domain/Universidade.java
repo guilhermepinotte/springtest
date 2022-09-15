@@ -11,9 +11,9 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "cursos")
+@Table(name = "universidades")
 @Data
-public class Curso {
+public class Universidade {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +21,4 @@ public class Curso {
     
     private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "idDepartamento")
-    private Departamento departamento;
-
-    @ManyToOne
-    @JoinColumn(name = "idAluno")
-    private Aluno aluno;
 }
