@@ -9,6 +9,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import java.util.List;
 import lombok.Data;
 
 @Entity
@@ -29,6 +30,6 @@ public class Aluno extends Pessoa {
     @JoinColumn(name = "idCurso")
     private Curso curso;
 
-    // @ManyToMany
-    // private DisciplinasMatriculadas matriculadas;
+    @ManyToMany
+    private List<Disciplina> disciplinas;
 }
