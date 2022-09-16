@@ -2,10 +2,17 @@ package com.dev.firstapi.domain;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+import lombok.Data;
+
+@Entity
+@Table(name = "taes")
+@Data
 public class Tae extends Servidor {
     
     @ManyToOne
-    @JoinColumn(name = "idDepartamento")
-    private Departamento departamento;
+    @JoinColumn(name = "idCentro")
+    private Centro centro;
 }

@@ -25,4 +25,8 @@ public class Disciplina {
     @ManyToOne
     @JoinColumn(name = "idDocente")
     private Docente docente;
+
+    @ManyToOne
+    @JoinColumn(name = "idCurso")
+    private Curso curso;
 }

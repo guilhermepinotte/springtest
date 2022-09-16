@@ -22,8 +22,11 @@ public class Aluno extends Pessoa {
     
     private String email;
 
+    //pesquisar tipo data no java
+    private String dataIngresso;
+
     @ManyToOne
-    @JoinColumn(name = "id_curso")
+    @JoinColumn(name = "idCurso")
     private Curso curso;
 
     // @ManyToMany

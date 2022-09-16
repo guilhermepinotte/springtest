@@ -14,19 +14,25 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "cursos")
+@Table(name = "centros")
 @Data
-public class Curso {
-    
+public class Centro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    
+    private Long id;
+
     private String nome;
 
-    @OneToMany(mappedBy = "cursos")
-    private List<Aluno> alunos;
+    @ManyToOne
+    @JoinColumn(name = "idCampus")
+    private Campus campus;
 
-    @OneToMany(mappedBy = "cursos")
-    private List<Disciplina> disciplinas;
+    @OneToMany(mappedBy = "centros")
+    private List<Curso> cursos;
+
+    @OneToMany(mappedBy = "centros")
+    private List<Docente> docentes;
+
+    @OneToMany(mappedBy = "centros")
+    private List<Tae> taes;
 }
