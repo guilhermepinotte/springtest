@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,7 +39,9 @@ public class Pessoa {
     @Column(name = "dataCadastro", columnDefinition = "TIMESTAMP")
     private LocalDateTime dataCadastro = LocalDateTime.now();
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL) 
+    // @OneToOne
+    // @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="idEndereco", referencedColumnName = "id")
     private Endereco endereco;
 }
