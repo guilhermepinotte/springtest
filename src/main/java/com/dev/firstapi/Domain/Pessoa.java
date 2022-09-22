@@ -3,6 +3,7 @@ package com.dev.firstapi.domain;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,11 +33,12 @@ public class Pessoa {
     private String email;
     @Column(length = 11)
     private String cpf;
-    @Column(name = "data_nascimento")
+    @Column(name = "dataNascimento")
     private LocalDate dataNascimento;
-    @Column(name = "data_cadastro")
-    private LocalDateTime dataCadastro;
-    @OneToOne
-    @JoinColumn(name="id_endereco")
+    @Column(name = "dataCadastro", columnDefinition = "TIMESTAMP")
+    private LocalDateTime dataCadastro = LocalDateTime.now();
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="idEndereco", referencedColumnName = "id")
     private Endereco endereco;
 }
