@@ -14,23 +14,27 @@ import javax.persistence.Table;
 import java.util.List;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 // @PrimaryKeyJoinColumn(name="id")
 @Table(name = "alunos")
-// @Data
-public class Aluno extends Pessoa {
+@Data
+// @EqualsAndHashCode(callSuper = true)
+public class Aluno  {
 // public class Aluno {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column
-    private long matricula;
+    private Long matricula;
     
-    // @Column(name = "id_pessoa")
-    private long idPessoa;
+    // @Column(name = "idPessoa")
+    @ManyToOne
+    @JoinColumn(name = "idPessoa")
+    private Pessoa pessoa;
     
     @Column(nullable = false, length = 50)
     private String situacao;

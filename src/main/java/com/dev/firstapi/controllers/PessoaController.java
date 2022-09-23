@@ -22,12 +22,7 @@ public class PessoaController {
 
     @GetMapping
     public List<Pessoa> findAll () {
-        List<Pessoa> pessoas = this.repository.findAll();
-        for (Pessoa pessoa : pessoas) {
-            // System.out.println(pessoa.getEndereco());
-            Hibernate.unproxy(pessoa.getEndereco());
-        }
-        return pessoas;
+        return this.repository.findAll();
     }
 
     @GetMapping(value = "/{id}")
