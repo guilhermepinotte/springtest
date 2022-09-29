@@ -8,6 +8,8 @@ import com.dev.firstapi.repositories.AlunoRepository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +38,27 @@ public class AlunoController {
     public Aluno findOneByMatricula (@PathVariable Long matricula) {
         return this.repository.findOneByMatricula(matricula);
     }
+
+    @GetMapping(value = "nome/{n}")
+    public List<Aluno> encontrarAlunoPorNome (@PathVariable String n) {
+        return this.repository.encontrarPorNome(n);
+    }
+
+    // @DeleteMapping(value = "delete/{id}")
+    // public ResponseEntity<Long> deleteAluno (@PathVariable Long id) {
+    //     var isRemoved = this.repository.delete(this.repository.findById(id).get());
+    //     if (!isRemoved) {
+    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    //     }
+    //     return new ResponseEntity<>(id, HttpStatus.OK);
+    // } 
+
+    @DeleteMapping(value = "/delete/{id}")
+    public void deleteAluno (@PathVariable Long id) {
+        
+        this.repository.deleteById(id);
+        
+    } 
 
     // @GetMapping(value = "/{nome}")
     // public List<Aluno> findByNomeLike (@PathVariable String nome) {
