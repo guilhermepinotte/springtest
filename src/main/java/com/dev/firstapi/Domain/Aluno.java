@@ -33,7 +33,6 @@ public class Aluno  {
     @Column
     private Long matricula;
     
-    // @Column(name = "idPessoa")
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idPessoa")
     private Pessoa pessoa;
