@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import lombok.Data;
@@ -41,14 +42,15 @@ public class Aluno  {
     private String situacao;
 
 
-    //pesquisar tipo data no java
-    // private String dataIngresso;
+    @Column(name = "dataIngresso")
+    private LocalDate dataIngresso;
 
-    // private Double cr;
+    @Column(name = "cr", precision = 2, columnDefinition = "double default '10.00'")
+    private Double cr;
 
-    // @ManyToOne
-    // @JoinColumn(name = "idCurso")
-    // private Curso curso;
+    @ManyToOne
+    @JoinColumn(name = "idCurso")
+    private Curso curso;
 
     // @ManyToMany
     // private List<Disciplina> disciplinas;

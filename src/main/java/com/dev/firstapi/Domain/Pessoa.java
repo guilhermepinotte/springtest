@@ -30,12 +30,16 @@ public class Pessoa {
 
     @Column(nullable = false, length = 100)   
     private String nome;
+
     @Column(nullable = false, length = 100)
     private String email;
+
     @Column(length = 11)
     private String cpf;
+
     @Column(name = "dataNascimento")
     private LocalDate dataNascimento;
+    
     @Column(name = "dataCadastro", columnDefinition = "TIMESTAMP")
     private LocalDateTime dataCadastro = LocalDateTime.now();
     
