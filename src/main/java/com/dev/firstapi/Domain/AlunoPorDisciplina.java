@@ -10,8 +10,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
-@Table(name = "alunos-disciplina")
+@Table(name = "alunosMatriculados")
+@Data
 public class AlunoPorDisciplina {
     
     @Id

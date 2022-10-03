@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -19,12 +20,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-// @PrimaryKeyJoinColumn(name="id")
 @Table(name = "alunos")
 @Data
 // @EqualsAndHashCode(callSuper = true)
-public class Aluno  {
-// public class Aluno {
+
+public class Aluno extends Pessoa{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,13 +44,14 @@ public class Aluno  {
     @Column(name = "dataIngresso")
     private LocalDate dataIngresso;
 
-    @Column(name = "cr", precision = 2, columnDefinition = "double default '10.00'")
+    @Column(name = "cr", precision = 20, scale = 2, columnDefinition = "double default '10.00'")
     private Double cr;
 
     @ManyToOne
     @JoinColumn(name = "idCurso")
     private Curso curso;
 
-    // @ManyToMany
-    // private List<Disciplina> disciplinas;
+    @OneToMany(mappedBy = "aluno")
+    private List<AlunoPorDisciplina> disciplinasMatriculadas;
+
 }

@@ -4,17 +4,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
 
-// @Entity
+@Entity
 // @PrimaryKeyJoinColumn(name = "idServidor")
-// @Table(name = "taes")
-// @Data
-public class Tae extends Servidor {
+@Table(name = "taes")
+@Data
+public class Tae {
     
-    // @ManyToOne
-    // @JoinColumn(name = "idCentro")
-    // private Centro centro;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @ManyToOne
+    @JoinColumn(name = "idCentro")
+    private Centro centro;
 }

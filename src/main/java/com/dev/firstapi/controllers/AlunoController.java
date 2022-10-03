@@ -6,6 +6,7 @@ import com.dev.firstapi.domain.Aluno;
 import com.dev.firstapi.repositories.AlunoRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
 @RequestMapping("/alunos")
@@ -30,8 +32,16 @@ public class AlunoController {
     }
 
     @GetMapping(value = "/{id}")
-    public Aluno findById (@PathVariable Long id) {
-        return this.repository.findById(id).get();
+    @ResponseBody
+    public ResponseEntity<Aluno> findById (@PathVariable Long id) {
+        // return this.repository.findById(id).get();
+
+        Optional<Aluno> aluno = this.repository.findById(id);
+        if (aluno.isPresent()) {
+            return ResponseEntity.ok(aluno.get());
+        }
+        return ResponseEntity.notFound().build();
+
     }
 
     @GetMapping(value = "matr/{matricula}")

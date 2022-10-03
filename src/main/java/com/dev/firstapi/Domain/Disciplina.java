@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -36,11 +37,6 @@ public class Disciplina {
     @JoinColumn(name = "idCurso")
     private Curso curso;
 
-    // @ManyToMany
-    // @JoinTable(
-    //     name = "disciplinas_aluno",
-    //     joinColumns = @JoinColumn(name = "idDisciplina"),
-    //     inverseJoinColumns = @JoinColumn(name = "idAluno")
-    // )
-    private List<Aluno> alunosMatriculados;
+    @OneToMany(mappedBy = "disciplina")
+    private List<AlunoPorDisciplina> alunosMatriculados;
 }

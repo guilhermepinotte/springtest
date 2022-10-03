@@ -13,8 +13,8 @@ import lombok.Data;
 @Entity
 // @PrimaryKeyJoinColumn(name = "idPessoa")
 @Table(name = "servidores")
-// @Data
-public class Servidor extends Pessoa {
+@Data
+public class Servidor {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

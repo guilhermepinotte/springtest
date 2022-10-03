@@ -3,20 +3,28 @@ package com.dev.firstapi.domain;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import lombok.Data;
 
 @Entity
-// @PrimaryKeyJoinColumn(name = "idServidor")
 @Table(name = "docentes")
-// @Data
-public class Docente extends Servidor {
+@Data
+// @Inheritance(strategy = InheritanceType.JOINED)
+public class Docente {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @ManyToOne
     @JoinColumn(name = "idCentro")
     private Centro centro;
