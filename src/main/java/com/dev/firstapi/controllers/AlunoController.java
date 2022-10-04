@@ -34,15 +34,17 @@ public class AlunoController {
     @GetMapping(value = "/{id}")
     @ResponseBody
     public ResponseEntity<Aluno> findById (@PathVariable Long id) {
-        // return this.repository.findById(id).get();
-
         Optional<Aluno> aluno = this.repository.findById(id);
         if (aluno.isPresent()) {
             return ResponseEntity.ok(aluno.get());
         }
         return ResponseEntity.notFound().build();
-
     }
+
+    // @GetMapping(value = "/{id}")
+    // public Aluno findById (@PathVariable long id){
+    //     return this.repository.findById(id).get();
+    // }
 
     @GetMapping(value = "matr/{matricula}")
     public Aluno findOneByMatricula (@PathVariable Long matricula) {

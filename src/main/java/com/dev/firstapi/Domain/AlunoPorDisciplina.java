@@ -29,7 +29,7 @@ public class AlunoPorDisciplina {
     @JoinColumn(name = "idAluno")
     private Aluno aluno;
 
-    @Column(name = "nota", precision = 2, columnDefinition = "double default '0.00")
+    @Column(name = "nota", precision = 2, columnDefinition = "double default '0.00'")
     private Double nota;
 
     @Column(name = "status")

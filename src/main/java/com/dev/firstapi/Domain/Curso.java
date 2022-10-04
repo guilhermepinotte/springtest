@@ -24,15 +24,15 @@ public class Curso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "idCentro")
     private Centro centro;
 
-    @OneToMany(mappedBy = "curso")
-    private List<Aluno> alunos;
+    // @OneToMany(mappedBy = "curso")
+    // private List<Aluno> alunos;
 
-    @OneToMany(mappedBy = "curso")
-    private List<Disciplina> disciplinas;
+    // @OneToMany(mappedBy = "curso")
+    // private List<Disciplina> disciplinas;
 
     @Column(name = "nome")
     private String nome;

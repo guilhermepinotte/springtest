@@ -27,12 +27,12 @@ public class Centro {
     // @JoinColumn(name = "idCampus")
     // private Campus campus;
 
-    @OneToMany(mappedBy = "centro")
-    private List<Curso> cursos;
+    // @OneToMany(mappedBy = "centro")
+    // private List<Curso> cursos;
 
-    @OneToMany(mappedBy = "centro")
-    private List<Docente> docentes;
+    // @OneToMany(mappedBy = "centro")
+    // private List<Docente> docentes;
 
-    @OneToMany(mappedBy = "centro")
-    private List<Tae> taes;
+    // @OneToMany(mappedBy = "centro")
+    // private List<Tae> taes;
 }

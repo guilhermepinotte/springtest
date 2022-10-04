@@ -2,7 +2,7 @@ package com.dev.firstapi.domain;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +12,6 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-// @PrimaryKeyJoinColumn(name = "idServidor")
 @Table(name = "taes")
 @Data
 public class Tae {
@@ -20,6 +19,10 @@ public class Tae {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @ManyToOne
+    @JoinColumn(name = "idServidor")
+    private Servidor servidor;
     
     @ManyToOne
     @JoinColumn(name = "idCentro")
