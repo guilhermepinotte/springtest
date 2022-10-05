@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,6 +29,7 @@ public class Aluno {
     private Long id;
 
     @Column(name = "matricula")
+    @NotNull
     private Long matricula;
     
     @ManyToOne(cascade = CascadeType.ALL)

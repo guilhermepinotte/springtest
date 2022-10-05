@@ -3,10 +3,17 @@ package com.dev.firstapi.controllers;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.firstapi.domain.Aluno;
+import com.dev.firstapi.domain.Curso;
 import com.dev.firstapi.repositories.AlunoRepository;
+import com.dev.firstapi.repositories.CursoRepository;
 
+import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +22,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +33,9 @@ public class AlunoController {
     
     @Autowired
     private AlunoRepository repository;
+
+    @Autowired
+    private CursoRepository cursoRepository;
 
     @GetMapping
     public List<Aluno> findAll () {
@@ -40,11 +51,6 @@ public class AlunoController {
         }
         return ResponseEntity.notFound().build();
     }
-
-    // @GetMapping(value = "/{id}")
-    // public Aluno findById (@PathVariable long id){
-    //     return this.repository.findById(id).get();
-    // }
 
     @GetMapping(value = "matr/{matricula}")
     public Aluno findOneByMatricula (@PathVariable Long matricula) {
@@ -65,13 +71,6 @@ public class AlunoController {
     //     return new ResponseEntity<>(id, HttpStatus.OK);
     // } 
 
-    @DeleteMapping(value = "/delete/{id}")
-    public void deleteAluno (@PathVariable Long id) {
-        
-        this.repository.deleteById(id);
-        
-    } 
-
     // @GetMapping(value = "/{nome}")
     // public List<Aluno> findByNomeLike (@PathVariable String nome) {
     //     Aluno aluno = this.repository.fin
@@ -79,12 +78,45 @@ public class AlunoController {
     // }
 
     @PostMapping
-    public Aluno insert (@RequestBody Aluno aluno) {
-        return this.repository.save(aluno);
+    @ResponseBody
+    public ResponseEntity salvarAluno (@RequestBody @Valid Aluno aluno) {
+        
+        Optional<Curso> curso =  this.cursoRepository.findById(aluno.getCurso().getId());
+        if (!curso.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        aluno.setCurso(curso.get());
+        
+        return ResponseEntity.ok(this.repository.save(aluno));
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete (@PathVariable Long id) {
+    @ResponseBody
+    public ResponseEntity deletarAluno (@PathVariable Long id) {
+        Optional<Aluno> aluno = this.repository.findById(id);
+        
+        if (aluno.isPresent()) {
+            this.repository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 
+    @PutMapping(value = "/{id}")
+    @ResponseBody
+    public ResponseEntity atualizarAluno (@PathVariable Long id, @RequestBody Aluno aluno) {
+        Optional<Aluno> alunoExistente = this.repository.findById(id);
+        
+        if (alunoExistente.isPresent()) {
+            alunoExistente.map( alunoE -> {
+               aluno.setId(alunoE.getId());
+               return ResponseEntity.ok(this.repository.save(aluno)); 
+            } );
+            // aluno.setId(id);
+            
+            // this.repository.save(aluno);
+            // return ResponseEntity.ok(this.repository.save(aluno));
+        }
+        return ResponseEntity.notFound().build();
     }
 }
