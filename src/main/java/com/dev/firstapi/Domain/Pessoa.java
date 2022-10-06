@@ -12,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -38,14 +41,13 @@ public class Pessoa {
     private String cpf;
 
     @Column(name = "dataNascimento")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
     
-    @Column(name = "dataCadastro", columnDefinition = "TIMESTAMP")
+    @Column(name = "dataCadastro", columnDefinition = "timestamp default current_timestamp" )
     private LocalDateTime dataCadastro = LocalDateTime.now();
     
     @OneToOne(cascade = CascadeType.ALL) 
-    // @OneToOne
-    // @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="idEndereco", referencedColumnName = "id")
     private Endereco endereco;
 }

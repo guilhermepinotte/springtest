@@ -12,6 +12,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,8 +25,6 @@ import lombok.Data;
 @Entity
 @Table(name = "alunos")
 @Data
-// @EqualsAndHashCode(callSuper = true)
-
 public class Aluno {
     
     @Id
@@ -29,7 +32,7 @@ public class Aluno {
     private Long id;
 
     @Column(name = "matricula")
-    @NotNull
+    // @NotNull
     private Long matricula;
     
     @ManyToOne(cascade = CascadeType.ALL)
@@ -40,13 +43,16 @@ public class Aluno {
     private String situacao;
 
     @Column(name = "dataIngresso")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataIngresso;
 
     @Column(name = "cr", precision = 20, scale = 2, columnDefinition = "double default '10.00'")
-    private Double cr;
+    private Double cr = 10.00;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
+    // @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idCurso")
+    // @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Curso curso;
 
     // @OneToMany(mappedBy = "aluno")
