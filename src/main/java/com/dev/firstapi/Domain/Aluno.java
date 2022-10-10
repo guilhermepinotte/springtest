@@ -46,8 +46,9 @@ public class Aluno {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataIngresso;
 
+    //ANALISAR O PORQUÊ DE NÃO PEGAR O VALOR DEFAULT
     @Column(name = "cr", precision = 20, scale = 2, columnDefinition = "double default '10.00'")
-    private Double cr = 10.00;
+    private Double cr;
 
     @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
     // @ManyToOne(cascade = CascadeType.ALL)

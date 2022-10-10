@@ -45,7 +45,8 @@ public class Pessoa {
     private LocalDate dataNascimento;
     
     @Column(name = "dataCadastro", columnDefinition = "timestamp default current_timestamp" )
-    private LocalDateTime dataCadastro = LocalDateTime.now();
+    // private LocalDateTime dataCadastro = LocalDateTime.now();
+    private LocalDateTime dataCadastro;
     
     @OneToOne(cascade = CascadeType.ALL) 
     @JoinColumn(name="idEndereco", referencedColumnName = "id")
