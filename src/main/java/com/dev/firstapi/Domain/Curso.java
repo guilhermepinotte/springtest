@@ -28,6 +28,9 @@ public class Curso {
     @JoinColumn(name = "idCentro")
     private Centro centro;
 
+    @Column(name = "codigo")
+    private Long codigo;
+
     // @OneToMany(mappedBy = "curso")
     // private List<Aluno> alunos;
 
@@ -36,4 +39,9 @@ public class Curso {
 
     @Column(name = "nome")
     private String nome;
+
+
+    public static boolean naoExiste (Curso curso) {
+        return curso == null;
+    }
 }

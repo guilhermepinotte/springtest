@@ -6,4 +6,6 @@ import com.dev.firstapi.domain.Curso;
 
 public interface CursoRepository extends JpaRepository<Curso, Long>{
     
+    //pesquisa Curso por codigo
+    Curso findOneByCodigo (Long codigo);
 }
