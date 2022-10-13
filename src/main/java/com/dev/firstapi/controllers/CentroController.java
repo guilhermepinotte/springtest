@@ -60,14 +60,14 @@ public class CentroController {
                             new ResponseStatusException(HttpStatus.NOT_FOUND, "Centro não encontrado"));
     }
 
-    // NÃO ESTÁ FUNCIONANDO
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void atualizaCentro (@RequestBody Centro centro, @PathVariable Long id) {
         repository
             .findById(id)
             .map(centroExistente -> {
-                repository.save(centroExistente);
+                centro.setId(centroExistente.getId());
+                repository.save(centro);
                 return centroExistente;
             })
             .orElseThrow( () -> 

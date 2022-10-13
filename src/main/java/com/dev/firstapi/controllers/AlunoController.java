@@ -39,8 +39,7 @@ public class AlunoController {
     public Aluno encontrarAlunoPorId (@PathVariable Long id) {
         return repository
                 .findById(id)
-                .orElseThrow( () -> 
-                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Aluno não encontrado"));
+                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Aluno não encontrado"));
     }
 
     // @GetMapping(value = "matr/{matricula}")
@@ -74,8 +73,7 @@ public class AlunoController {
 
         Curso curso = this.cursoRepository
                             .findById(aluno.getCurso().getId())
-                            .orElseThrow( () -> 
-                                            new ResponseStatusException(HttpStatus.NOT_FOUND, "Não é possível cadastrar aluno sem Curso"));
+                            .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não é possível cadastrar aluno sem Curso"));
 
         aluno.setCurso(curso);
         
@@ -85,23 +83,24 @@ public class AlunoController {
     @DeleteMapping(value = "{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarAluno (@PathVariable Long id) {
-        repository.findById(id)
-                    .map( aluno -> {
-                        repository.delete(aluno);
-                        return aluno;
-                    })
-                    .orElseThrow( () -> 
-                                    new ResponseStatusException(HttpStatus.NOT_FOUND, "Aluno não enontrado"));
+        repository
+            .findById(id)
+            .map( aluno -> {
+                repository.delete(aluno);
+                return aluno;
+            })
+            .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Aluno não enontrado"));
     }
 
     @PutMapping(value = "{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void atualizarAluno (@PathVariable Long id, @RequestBody Aluno aluno) {
-        repository.findById(id)
-                    .map(alunoExistente -> {
-                        aluno.setId(alunoExistente.getId());
-                        repository.save(aluno);
-                        return alunoExistente;
-                    }).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Aluno não enontrado"));
+        repository
+            .findById(id)
+            .map(alunoExistente -> {
+                aluno.setId(alunoExistente.getId());
+                repository.save(aluno);
+                return alunoExistente;
+            }).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Aluno não enontrado"));
     }
 }
