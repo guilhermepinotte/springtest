@@ -74,7 +74,7 @@ public class CursoController {
             .findById(id)
             .map((curso) -> {
                 repository.delete(curso);
-                return curso;
+                return Void.TYPE;
             })
             .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Curso não existe"));
     }
@@ -86,9 +86,6 @@ public class CursoController {
             .findById(id)
             .map((cursoExistente) -> {
                 curso.setId(cursoExistente.getId());
-                // curso.setCodigo(cursoExistente.getCodigo());
-                // curso.setNome(cursoExistente.getNome());
-                // curso.setCentro(cursoExistente.getCentro());
                 repository.save(curso);
                 return cursoExistente;
             })

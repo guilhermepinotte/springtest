@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import static org.springframework.http.HttpStatus.*;
 @RestController
 @RequestMapping("/alunos")
 public class AlunoController {
@@ -39,7 +40,7 @@ public class AlunoController {
     public Aluno encontrarAlunoPorId (@PathVariable Long id) {
         return repository
                 .findById(id)
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Aluno não encontrado"));
+                .orElseThrow( () -> new ResponseStatusException(NOT_FOUND, "Aluno não encontrado"));
     }
 
     // @GetMapping(value = "matr/{matricula}")
@@ -64,7 +65,7 @@ public class AlunoController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(CREATED)
     public Aluno salvarAluno (@RequestBody @Valid Aluno aluno) {
         // Optional<Curso> curso =  this.cursoRepository.findById(aluno.getCurso().getId());
         // if (!curso.isPresent()) {
@@ -73,7 +74,7 @@ public class AlunoController {
 
         Curso curso = this.cursoRepository
                             .findById(aluno.getCurso().getId())
-                            .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não é possível cadastrar aluno sem Curso"));
+                            .orElseThrow( () -> new ResponseStatusException(NOT_FOUND, "Não é possível cadastrar aluno sem Curso"));
 
         aluno.setCurso(curso);
         
@@ -81,7 +82,7 @@ public class AlunoController {
     }
 
     @DeleteMapping(value = "{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(NO_CONTENT)
     public void deletarAluno (@PathVariable Long id) {
         repository
             .findById(id)
@@ -89,11 +90,11 @@ public class AlunoController {
                 repository.delete(aluno);
                 return aluno;
             })
-            .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Aluno não enontrado"));
+            .orElseThrow( () -> new ResponseStatusException(NOT_FOUND, "Aluno não enontrado"));
     }
 
     @PutMapping(value = "{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(NO_CONTENT)
     public void atualizarAluno (@PathVariable Long id, @RequestBody Aluno aluno) {
         repository
             .findById(id)
@@ -101,6 +102,6 @@ public class AlunoController {
                 aluno.setId(alunoExistente.getId());
                 repository.save(aluno);
                 return alunoExistente;
-            }).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Aluno não enontrado"));
+            }).orElseThrow( () -> new ResponseStatusException(NOT_FOUND, "Aluno não enontrado"));
     }
 }

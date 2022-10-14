@@ -8,15 +8,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
-// @PrimaryKeyJoinColumn(name = "idPessoa")
-@Table(name = "servidores")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "servidores")
 public class Servidor {
     
     @Id
@@ -33,7 +35,7 @@ public class Servidor {
     @Column(name = "titulacao")
     private String titulacao;
 
-    @Column(name = "funcao")
+    @Column(name = "funcao", columnDefinition = "varchar default 'sem função'")
     private String funcao;
 
 }
