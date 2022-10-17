@@ -2,10 +2,11 @@ package com.dev.firstapi.dto;
 
 import java.time.LocalDate;
 
-import net.bytebuddy.asm.Advice.Local;
+import lombok.Data;
 
+@Data
 public class PessoaDTO {
-    private Long idEndereco;
+    private EnderecoDTO endereco;
 
     private String cpf;
     private LocalDate dataCadastro;

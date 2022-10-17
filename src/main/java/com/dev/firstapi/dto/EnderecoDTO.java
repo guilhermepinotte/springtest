@@ -1,5 +1,8 @@
 package com.dev.firstapi.dto;
 
+import lombok.Data;
+
+@Data
 public class EnderecoDTO {
     private String bairro;
     private String cep;

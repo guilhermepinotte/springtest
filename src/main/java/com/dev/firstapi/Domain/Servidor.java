@@ -26,7 +26,7 @@ public class Servidor {
     private Long id;
     
     @Column(name = "siape")
-    private Long siape;
+    private String siape;
 
     @ManyToOne
     @JoinColumn(name = "idPessoa")
